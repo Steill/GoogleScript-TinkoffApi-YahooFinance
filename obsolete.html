@@ -1,0 +1,132 @@
+/*
+function get_ith_row(a, b, c, row)
+{
+  if (a.length != b.length || a.length != c.length || +row > a.length) return null;
+
+  var values = [];
+  for (var i = 0; i < row.length; i++)
+  {
+    var r = row[i];
+    if (r == NaN || c[r] == undefined) break;
+    if (r == 0) 
+    {
+      values.push(["","",""]);
+      continue;
+    }
+    r -= 1;
+    Logger.log(r + " " + +a[r] + " " + +b[r] + " " + c[r]);
+    values.push([+a[r], +b[r], c[r].toString()]);
+  }
+  return values;
+}
+
+function get_last_position_from_n(tikers, tiker_range, positions, n)
+{
+  if (tikers.length != n.length || tiker_range.length != positions.length) return null;
+
+  var values = [];
+  for (var i = 0; i < tikers.length; i++)
+  {
+    var tiker = tikers[i].toString();
+    if (tiker == "") break;
+    if (n[i] == null)
+    {
+      values.push(0);
+      continue;
+    }
+    var pos = 0;
+    for (var j = +n[i] - 1; j >= 0; j--)
+    {
+      if (tiker_range[j] == tiker)
+      {
+        pos = positions[j];
+        break;
+      }
+    }
+    values.push(pos);
+  }
+  return values;
+}
+
+function showPwdGenMenu()
+{
+  var html = HtmlService.createHtmlOutputFromFile('token_input')
+      .setWidth(260)
+      .setHeight(200)
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+  SpreadsheetApp.getUi()
+      .showModalDialog(html, 'Change your token');
+}
+
+function showPwdAskMenu()
+{
+  var html = HtmlService.createHtmlOutputFromFile('pw_input')
+      .setWidth(260)
+      .setHeight(145)
+      .setSandboxMode(HtmlService.SandboxMode.IFRAME);
+  SpreadsheetApp.getUi()
+      .showModalDialog(html, 'Enter the password');
+}
+
+function generatePasswd(token, pwdlen)
+{
+  //token = 't.abcdefghijklmnopqrst1234567890';
+  var len = token.length;
+  var passwdLen = +pwdlen;
+  if (len <= 8)
+  {
+    SpreadsheetApp.getUi().alert('Invalid token');
+    return null;
+  }
+  var keys = [];
+  var nums = [0];
+  var pswd = Math.trunc(Math.random() * 9).toString();
+  for (var i = 1; i < passwdLen; i++)
+  {
+    var n = Math.trunc(Math.random() * passwdLen + len * i / (passwdLen + .3));
+    nums.push(n + 1);
+    keys.push(token.substring(nums[i-1],nums[i] - 1));      
+    pswd += token.charAt(n);
+  }
+  keys.push(token.substring(nums[passwdLen - 1], len));
+  
+  props.deleteAllProperties();
+  props.setProperty('key0',keys[0]);
+  for (var i = 1; i < passwdLen; i++)
+  {
+    var k = i + +pswd.charAt(0) % passwdLen;
+    if (k >= passwdLen) k -= passwdLen - 1;
+    props.setProperty('key'+i,keys[k]);
+  }
+  //Logger.log(pswd);
+  Logger.log(keys);
+  SpreadsheetApp.getUi().alert('Your password is: ' + pswd);
+  return 0;
+}
+
+function tokenRecreation(pswd)
+{
+  //pswd = '7.ba';
+  var passwdLen = pswd.length;
+  var token = props.getProperty('key0');
+  for (var i = 1; i < passwdLen; i++)
+  {
+    var k = i - +pswd.charAt(0) % passwdLen;
+    if (k <= 0) k += passwdLen - 1;
+    token += pswd.charAt(i) + props.getProperty('key'+k);
+  }
+  return token;
+}
+
+function updateToken(newtoken, pwdlen)
+{
+  if (newtoken.length <= 8)
+  {
+    SpreadsheetApp.getUi().alert('Неверный формат');
+    return null;
+  }
+  user.put("token", newtoken);
+  SpreadsheetApp.getUi().alert('Установлен новый токен');
+}
+
+*/
