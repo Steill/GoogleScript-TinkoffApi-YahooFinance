@@ -1,0 +1,17 @@
+<p>Past your <strong>Tinkoff.Invest</strong> token here</p>
+
+<form>
+  <input type="password" id="password" name="password" size="29" autofocus required>
+  <p>The characters in a field are masked.</p>
+Password length: <select name="pwdlength" id="pwdlength">
+    <option value="6" selected="selected">6</option>
+    <option value="5" selected="selected">5</option>
+    <option value="4" selected="selected">4</option>
+  </select> characters.<br><br>
+  <table style="width:100%">
+  <tr>
+    <th><input type="button" value="Submit" onclick="google.script.run.updateToken(this.form.password.value, this.form.pwdlength.value)"></th>
+    <th><input type="button" value="Cancel" onclick="google.script.host.close()"></th> 
+  </tr>
+</table>
+</form>
