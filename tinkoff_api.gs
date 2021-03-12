@@ -151,3 +151,4 @@ function getOperations(from_date = null, to_date = null, figiOrTiker = null)
   }
   return values;
 }
+ 
